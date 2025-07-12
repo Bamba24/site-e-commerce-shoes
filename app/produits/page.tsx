@@ -70,7 +70,7 @@ export default function ProductListing() {
       filtered = filtered.filter((p) => {
         const couleurs = typeof p.couleursDisponibles === 'string'
           ? p.couleursDisponibles.split(',').map(c => c.trim().toLowerCase())
-          : p.couleursDisponibles.map((c: string) => c.toLowerCase());
+          : (p.couleursDisponibles as string[]).map((c:string) => c.toLowerCase());
         return couleurs.includes(selectedColor.toLowerCase());
       });
     }

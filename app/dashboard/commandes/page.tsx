@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import type {Commande} from "../types/index";
+import type {Commande} from "../../types/index";
 
 
 export default function CommandeList() {

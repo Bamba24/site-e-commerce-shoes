@@ -73,6 +73,7 @@ export type Notification = {
   message: string;
   isRead: boolean;
   createdAt: string;
+  userId: string;
 };
 
  export type FormValuesProfil = {

@@ -11,7 +11,7 @@ export default function Headers() {
 
   const updatePanierCount = ()=>{
     const count = JSON.parse(localStorage.getItem("panier") || '[]');
-    const totalCount = count.reduce((acc: number, item: Produit[] ) => acc + item.quantity, 0);
+    const totalCount = count.reduce((acc: number, item: Produit ) => acc + item.quantity, 0);
     setPanierCount(totalCount)
   }
 
