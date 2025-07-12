@@ -3,9 +3,13 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function DELETE(_: NextRequest, context: { params: { id: string } }) {
+// ✅ BONNE signature compatible avec App Router
+export async function DELETE(
+  req: NextRequest,
+  context: { params: Promise<{ id: string }> }
+) {
   try {
-    const id = context.params.id;
+    const id = (await (context.params)).id;
 
     const produit = await prisma.produit.delete({
       where: { id },

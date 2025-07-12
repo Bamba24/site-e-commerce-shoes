@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import slugify from 'slugify';
 import { toast } from 'mui-sonner';
 import { DevTool } from '@hookform/devtools';
-import type {FormValuesAjoutProduit} from "../types/index"
+import type {FormValuesAjoutProduit} from "../../../types/index";
 
 
 export default function AddProductForm() {

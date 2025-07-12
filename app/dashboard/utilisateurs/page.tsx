@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import type {Utilisateur} from "../types/index"
+import type {Utilisateur} from "../../types/index";
 
 export default function UserList() {
   const [users, setUsers] = useState<Utilisateur[]>([]);

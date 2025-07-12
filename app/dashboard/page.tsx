@@ -22,6 +22,7 @@ export default function Stats() {
     produitTopVente: '',
     derniereCommandeDate: '',
     revenusParJour: 0,
+    totalRevenus: 0
   }
   ]);
 
