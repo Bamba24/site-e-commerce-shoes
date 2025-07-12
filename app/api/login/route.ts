@@ -33,6 +33,7 @@ export async function POST (req: NextRequest){
       );
      }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     
       return NextResponse.json({ message: "Erreur serveur" }, { status: 500 });

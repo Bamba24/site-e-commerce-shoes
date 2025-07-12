@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import type {Produit} from "../types/index"
+import type {Produit} from "../../types/index";
 import Image from 'next/image';
 
 
@@ -26,6 +26,7 @@ export default function ProductList() {
   }, []);
 
 
+  
   const handleDelete = async (id: string) => {
   const confirm = window.confirm('Confirmer la suppression de ce produit ?');
   if (!confirm) return;
@@ -35,7 +36,7 @@ export default function ProductList() {
       method: 'DELETE',
     });
 
-    if (!res.ok) throw new Error('Erreur de suppression');
+    if (!res.ok) console.log("Echec de l'operation de suppresion");
 
     // Mise à jour du state local
     setProduits((prev) => prev.filter((p) => p.id !== id));

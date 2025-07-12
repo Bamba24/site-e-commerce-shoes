@@ -4,13 +4,14 @@ import { useState, useEffect } from 'react';
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import type { Produit } from '../types/index';
 import '../globals.css';
 
 export default function Headers() {
 
   const updatePanierCount = ()=>{
     const count = JSON.parse(localStorage.getItem("panier") || '[]');
-    const totalCount = count.reduce((acc, item) => acc + item.quantity, 0);
+    const totalCount = count.reduce((acc: number, item: Produit[] ) => acc + item.quantity, 0);
     setPanierCount(totalCount)
   }
 
@@ -59,7 +60,7 @@ export default function Headers() {
         </button>
         <button>
           <Link href="/register" className='text-white'>
-            S'enregistrer
+            S&apos;enregistrer
           </Link>
         </button>
         {/* <button>

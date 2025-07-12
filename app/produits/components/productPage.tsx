@@ -6,7 +6,7 @@ import { toast } from 'mui-sonner';
 import type { Produit } from '@/app/types/index';
 import '../../globals.css';
 
-export default function ProductPage({ params }: { params: { slug: string } }) {
+export default function ProductPage({ params }: {params: {slug: string}}) {
 
   const [product, setProduct] = useState<Produit | null>(null);
   const [similarProducts, setSimilarProducts] = useState<Produit[]>([]);
@@ -122,44 +122,58 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             </Link>
           </div>
 
-          <p className="text-xs text-gray-400 mt-2">Livraison offerte dès 50 € d'achat</p>
+          <p className="text-xs text-gray-400 mt-2">Livraison offerte dès 50 € d&apos;achat</p>
         </div>
       </div>
 
-      {/* Tabs Section */}
-      <div className="mt-12 border-b border-gray-200 text-sm flex gap-6">
-        <button className="pb-2 border-b-2 border-black font-semibold">Description</button>
-        <button className="pb-2 text-gray-500">Avis</button>
-      </div>
 
       {/* Similar Products */}
       <div className="mt-12">
         <h3 className="[font-size:var(--police-secondary)] font-[var(--font-titre)] mb-6">Produits similaires</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-          {similarProducts.map((prod, idx) => {
-            const imgs = prod.images.split(',');
-            return (
-              <Link href={`/produits/${prod.slug}`} key={idx} className="relative">
-                <div
-                  className="w-full h-80 bg-no-repeat bg-cover bg-center rounded-xl"
-                  style={{ backgroundImage: `url('/${imgs[0]}')` }}
-                ></div>
-                {prod.remise > 0 && (
-                  <div className="absolute top-2 left-2 bg-black bg-opacity-70 text-white px-2 py-1 text-xs rounded">
-                    -{prod.remise}%
-                  </div>
-                )}
-                <div>
-                  <p className="[font-size:var(--police-title-card-primary)] truncate">{prod.nom}</p>
-                  <p className="[font-size:var(--police-title-card-secondary)]">
-                    <span className="line-through text-gray-300 mr-2">{prod.ancienPrix}</span>
-                    {prod.prix} €
-                  </p>
+        {similarProducts.map((prod, idx) => {
+          const imgs = prod.images?.split(',') || [];
+          return (
+            <Link
+              href={`/produits/${prod.slug}`}
+              key={idx}
+              className="relative rounded-xl overflow-hidden group shadow-md"
+            >
+              {/* Image avec effet zoom */}
+              <div
+                className="h-80 bg-cover bg-center transition-transform duration-500 scale-100 group-hover:scale-105"
+                style={{ backgroundImage: `url('/${imgs[0]}')` }}
+              ></div>
+
+              {/* Overlay dégradé */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent rounded-xl"></div>
+
+              {/* Badge de remise */}
+              {prod.remise > 0 && (
+                <div className="absolute top-3 left-3 bg-red-600 text-white px-2 py-1 text-xs rounded-full font-semibold shadow">
+                  -{prod.remise}%
                 </div>
-              </Link>
-            );
-          })}
-        </div>
+              )}
+
+              {/* Infos produit */}
+              <div className="absolute bottom-0 z-10 p-4 text-white">
+                <p className="[font-size:var(--police-title-card-primary)] truncate font-semibold drop-shadow-md">
+                  {prod.nom}
+                </p>
+                <p className="[font-size:var(--police-title-card-secondary)] font-bold mt-1">
+                  {prod.ancienPrix && (
+                    <span className="line-through text-gray-300 mr-2 font-normal">
+                      {prod.ancienPrix}
+                    </span>
+                  )}
+                  {prod.prix} €
+                </p>
+              </div>
+            </Link>
+          );
+        })}
+      </div>
+
       </div>
     </div>
   );

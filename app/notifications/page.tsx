@@ -20,7 +20,7 @@ export default function NotificationsPage() {
       const payload = JSON.parse(atob(token.split('.')[1]));
       const userId = payload.id;
 
-      const filtered = all.filter((n: notification) => n.userId === userId);
+      const filtered = all.filter((n: Notification) => n.userId === userId);
       setNotifications(filtered);
 
       // Marquer comme lues

@@ -15,8 +15,16 @@ export type Produit = {
   stock: number;
   note: number;
   nombreAvis: number;
-  quantity?: number; // ✅ Optionnel ici (utile pour le panier)
+  quantity: number; // ✅ Optionnel ici (utile pour le panier)
 };
+
+export type ProduitCommande = {
+  id: string;
+  nom: string;
+  prix: number;
+  quantity: number;
+};
+
 
 export type FormValuesAjoutProduit = {
   nom: string;
@@ -89,6 +97,7 @@ export type FormValues = {
 };
 
 export type JwtPayload = {
+  nom: string;
   id: string;
   email: string;
   role: string;

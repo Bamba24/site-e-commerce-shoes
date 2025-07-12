@@ -21,7 +21,7 @@ export default function RegisterPage() {
     },
   });
 
-  const { register, handleSubmit, control, formState, watch } = form;
+  const { register, handleSubmit, control, formState } = form;
   const { errors } = formState;
 
   const onSubmit = async (data: RegisterFormValues) => {
@@ -112,7 +112,7 @@ export default function RegisterPage() {
               type="submit"
               className="bg-[var(--primary-color)] hover:bg-red-600 text-white py-2 px-6 rounded-full w-full mt-4 transition-all"
             >
-              S'inscrire
+              S&apos;inscrire
             </button>
           </form>
 

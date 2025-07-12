@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
 import '../globals.css';
@@ -8,26 +10,43 @@ export default function Faq() {
       {/* Colonne gauche */}
       <div className="lg:w-1/2 w-full">
         <p className="[font-size:var(--police-secondary)] font-[var(--font-titre)]">
-          Frequently Asked Questions
+          Foire aux Questions
         </p>
-        <p className="[font-size:var(--police-tertiary)] mb-[var(--margin-bottom-title)]">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.
+        <p className="[font-size:var(--police-tertiary)] mb-[var(--margin-bottom-title)] text-gray-700">
+          Vous avez une question ? Consultez les réponses ci-dessous. Si vous ne trouvez pas ce que vous cherchez, contactez-nous.
         </p>
         <button className="[font-size:var(--police-button)] bg-black py-2 px-4 text-white font-semibold rounded-full hover:bg-gray-800 flex items-center gap-x-2 transition-all">
-          Ask a Question
-          <Image src="/icon-svg/chevron-droite.svg" alt="Logo" width={20} height={20} />
+          Poser une question
+          <Image src="/icon-svg/chevron-droite.svg" alt="Chevron" width={20} height={20} />
         </button>
       </div>
 
-      {/* Colonne droite */}
+      {/* Colonne droite - Questions */}
       <div className="lg:w-1/2 w-full mt-8 lg:mt-0">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {[90, 100, 98, 97].map((percent, index) => (
+        <div className="flex flex-col gap-6">
+          {[
+            {
+              question: "Quels sont les délais de livraison ?",
+              answer: "La livraison prend entre 2 à 5 jours ouvrables selon votre localisation.",
+            },
+            {
+              question: "Puis-je retourner un article ?",
+              answer: "Oui, vous avez 14 jours pour retourner un produit s’il ne vous convient pas.",
+            },
+            {
+              question: "Comment suivre ma commande ?",
+              answer: "Un email de confirmation contenant le lien de suivi est envoyé après l'achat.",
+            },
+            {
+              question: "Quels modes de paiement acceptez-vous ?",
+              answer: "Nous acceptons les paiements par carte bancaire, PayPal, et mobile money.",
+            },
+          ].map((faq, index) => (
             <div key={index}>
-              <p className="[font-size:var(--police-secondary)] font-bold">{percent}%</p>
-              <p className="[font-size:var(--police-tertiary)]">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.
+              <p className="[font-size:var(--police-tertiary)] font-semibold text-black">
+                {faq.question}
               </p>
+              <p className="text-sm text-gray-600 mt-1">{faq.answer}</p>
             </div>
           ))}
         </div>

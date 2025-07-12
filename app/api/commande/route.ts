@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
+import { sendOrderConfirmation } from '../../lib/email';
+import type { ProduitCommande } from '@/app/types'; // adapte le chemin
+
 import type { Produit } from '../../types';
 
 const prisma = new PrismaClient();
@@ -102,6 +105,14 @@ export async function POST(req: NextRequest) {
         totalProduits,
         totalRevenus,
       },
+    });
+
+    // Après création commande réussie :
+    await sendOrderConfirmation({
+      to: utilisateurEmail,
+      name: utilisateurNom,
+      produits: produits.map((p: ProduitCommande) => `${p.nom} x${p.quantity}`).join(', '),
+      total: total ?? totalCalcule,
     });
 
     return NextResponse.json({ success: true, commandeId: commande.id });

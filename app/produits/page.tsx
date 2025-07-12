@@ -225,44 +225,56 @@ export default function ProductListing() {
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-6 col-span-12 md:col-span-9">
-          {state.length > 0 ? (
-            state.map((product, idx) => {
-              const imagesArray = product.images?.split(',') || [];
-              return (
-                <Link
-                  href={`/produits/${product.slug}`}
-                  key={idx}
-                  className="w-full sm:w-[48%] lg:w-[31%] h-80 rounded-xl bg-cover bg-center bg-no-repeat flex flex-col justify-end p-4 relative text-slate-900 shadow-md"
-                  style={{
-                    backgroundImage: imagesArray.length > 0
-                      ? `url('/${imagesArray[0]}')`
-                      : 'none',
-                  }}
-                >
-                  <div>
-                    {product.remise > 0 && (
-                      <div className="absolute top-2 left-2 bg-black bg-opacity-70 text-white px-2 py-1 text-xs rounded">
-                        -{product.remise}%
-                      </div>
-                    )}
-                    <p className="[font-size:var(--police-title-card-primary)] truncate">{product.nom}</p>
-                    <p className="[font-size:var(--police-title-card-secondary)]">
-                      {product.ancienPrix && (
-                        <span className="line-through text-slate-900 mr-2">
-                          {product.ancienPrix} fcfa
-                        </span>
-                      )}
-                      {product.prix} fcfa
-                    </p>
-                  </div>
-                </Link>
-              );
-            })
-          ) : (
-            <p className="text-center text-gray-500 w-full">Aucun produit trouvé</p>
+       <div className="flex flex-wrap gap-6 col-span-12 md:col-span-9">
+  {state.length > 0 ? (
+    state.map((product, idx) => {
+      const imagesArray = product.images?.split(',') || [];
+      return (
+        <Link
+          href={`/produits/${product.slug}`}
+          key={idx}
+          className="relative w-full sm:w-[48%] lg:w-[31%] h-80 rounded-xl overflow-hidden group shadow-lg"
+        >
+          {/* Image de fond */}
+          <div
+            className="absolute inset-0 bg-cover bg-center transition-transform duration-500 scale-100 group-hover:scale-105"
+            style={{
+              backgroundImage:
+                imagesArray.length > 0 ? `url('/${imagesArray[0]}')` : 'none',
+            }}
+          ></div>
+
+          {/* Overlay dégradé */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+
+          {/* Étiquette de remise */}
+          {product.remise > 0 && (
+            <div className="absolute top-3 left-3 bg-red-600 text-white px-2 py-1 text-xs rounded-full font-semibold shadow">
+              -{product.remise}%
+            </div>
           )}
-        </div>
+
+          {/* Infos produit */}
+          <div className="relative z-10 p-4 text-white flex flex-col justify-end h-full">
+            <p className="[font-size:var(--police-title-card-primary)] font-semibold truncate drop-shadow-md">
+              {product.nom}
+            </p>
+            <p className="[font-size:var(--police-title-card-secondary)] mt-1 font-bold">
+              {product.ancienPrix && (
+                <span className="line-through text-gray-300 mr-2 font-normal">
+                  {product.ancienPrix}
+                </span>
+              )}
+              {product.prix} FCFA
+            </p>
+          </div>
+        </Link>
+      );
+    })
+  ) : (
+    <p className="text-center text-gray-500 w-full">Aucun produit trouvé</p>
+  )}
+</div>
 
       </div>
     </div>

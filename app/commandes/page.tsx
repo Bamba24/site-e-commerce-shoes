@@ -40,23 +40,55 @@ export default function CheckoutPage() {
   const total = commande.reduce((acc, item) => acc + item.prix * item.quantity, 0);
   const remise = commande.reduce((acc, item) => acc + item.prix * ((item.remise ?? 0) / 100), 0);
 
-  const genererPDF = () => {
-    const doc = new jsPDF();
-    doc.setFontSize(16);
-    doc.text('Facture', 20, 20);
+      const genererPDF = () => {
+      const doc = new jsPDF();
 
-    let y = 30;
-    commande.forEach((item) => {
-      doc.text(`${item.nom} x ${item.quantity} = ${item.prix * item.quantity} FCFA`, 20, y);
+      // En-tête
+      doc.setFontSize(20);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Facture', 105, 20, { align: 'center' });
+
+      doc.setFontSize(10);
+      doc.setFont('helvetica', 'normal');
+      doc.text(`Date : ${new Date().toLocaleDateString('fr-FR')}`, 20, 30);
+      doc.text(`N° commande : ${Math.floor(Math.random() * 1000000)}`, 150, 30);
+
+      doc.line(20, 35, 190, 35); // ligne horizontale
+
+      // Tableau
+      let y = 45;
+      doc.setFontSize(12);
+      doc.text('Produit', 20, y);
+      doc.text('Quantité', 100, y);
+      doc.text('Total (FCFA)', 160, y);
       y += 10;
-    });
 
-    doc.text(`Total: ${total - remise} FCFA`, 20, y + 10);
-    doc.save('facture.pdf');
+      commande.forEach((item) => {
+        doc.text(item.nom, 20, y);
+        doc.text(`${item.quantity}`, 110, y);
+        doc.text(`${item.prix * item.quantity}`, 160, y);
+        y += 10;
+      });
 
-    localStorage.removeItem('panier');
-    window.dispatchEvent(new Event('panierUpdated'));
-  };
+      doc.line(20, y + 2, 190, y + 2); // ligne de séparation
+
+      // Totaux
+      y += 10;
+      doc.setFont('helvetica', 'bold');
+      doc.text(`Sous-total : ${total} FCFA`, 150, y, { align: 'right' });
+      y += 8;
+      doc.text(`Remise : -${remise.toFixed(0)} FCFA`, 150, y, { align: 'right' });
+      y += 8;
+      doc.setFontSize(14);
+      doc.text(`Total à payer : ${(total - remise).toFixed(0)} FCFA`, 150, y, { align: 'right' });
+
+      // Footer
+      doc.setFontSize(10);
+      doc.setFont('helvetica', 'italic');
+      doc.text('Merci pour votre commande !', 105, y + 20, { align: 'center' });
+
+      doc.save('facture.pdf');
+    };
 
   const onSubmit = async (data: FormValues) => {
     try {
@@ -108,6 +140,11 @@ export default function CheckoutPage() {
       console.error('Erreur lors de la commande :', err);
     }
   };
+
+  const acceuil = ()=>{
+    window.location.reload();
+    router.push('/')
+  }
 
   return (
     <div className="p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -168,22 +205,39 @@ export default function CheckoutPage() {
         </form>
 
         {openModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/30">
-            <div className="flex flex-col md:flex-row gap-6 justify-center items-center border border-gray-300 bg-neutral-400 p-6 rounded-2xl shadow-xl h-50 w-120">
-              <button
-                onClick={() => router.push('/')}
-                className="bg-neutral-800 text-white font-bold py-3 px-6 rounded-xl hover:bg-neutral-700 transition"
-              >
-                Aller à l'accueil
-              </button>
-              <button
-                onClick={genererPDF}
-                className="bg-neutral-800 text-white font-bold py-3 px-6 rounded-xl hover:bg-neutral-700 transition"
-              >
-                Télécharger la facture
+          
+         <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/30">
+      <div className="bg-white rounded-2xl shadow-2xl px-10 py-12 max-w-xl text-center flex flex-col items-center gap-6">
+        {/* ✅ Icône de confirmation */}
+        <div className="w-16 h-16 flex items-center justify-center rounded-full bg-green-100 text-green-600 text-3xl mb-2">
+          ✓
+        </div>
+
+        {/* ✅ Message */}
+        <h2 className="text-2xl font-bold text-gray-800">Thank you!</h2>
+        <p className="text-gray-600">
+          Your order has been confirmed & it&apos;s on the way.
+          <br />
+          Check your email for the details.
+        </p>
+
+        {/* ✅ Boutons */}
+        <div className="flex flex-col sm:flex-row gap-4 mt-6 w-full justify-center">
+          <button
+            onClick={acceuil}
+            className="bg-black text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition"
+          >
+            Go to Homepage
+          </button>
+          <button
+            onClick={genererPDF}
+            className="border border-black px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition"
+          >
+            Check Order Details
               </button>
             </div>
           </div>
+        </div>
         )}
       </div>
 

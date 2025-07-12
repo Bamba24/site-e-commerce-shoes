@@ -110,8 +110,8 @@ export default function LoginPage() {
           </form>
 
           <p className="mt-6 text-sm text-center">
-            Vous n'avez pas de compte?{' '}
-            <a href="#" className="text-[var(--primary-color)] hover:underline">S'inscrire</a>
+            Vous n&apos;avez pas de compte?{' '}
+            <a href="#" className="text-[var(--primary-color)] hover:underline">S&apos;inscrire</a>
           </p>
         </div>
 

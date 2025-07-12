@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FiUser, FiLogOut, FiBell } from 'react-icons/fi';
 import { MdDashboard } from 'react-icons/md';
+import type {Produit} from "../types/index";
 
 export default function HeaderAdmin() {
 
@@ -24,9 +25,13 @@ export default function HeaderAdmin() {
      route.push('/')
   }
 
+  const pageNotification = ()=>{
+    window.location.reload();
+    route.push('/notificatons');
+  }
   const updatePanierCount = () => {
     const count = JSON.parse(localStorage.getItem('panier') || '[]');
-    const totalCount = count.reduce((acc: any, item: any) => acc + item.quantity, 0);
+    const totalCount = count.reduce((acc: number, item: Produit[]) => acc + item.quantity, 0);
     setPanierCount(totalCount);
   };
 
@@ -34,7 +39,7 @@ export default function HeaderAdmin() {
     try {
       const res = await fetch('/api/notifications');
       const data = await res.json();
-      const nonLues = data.filter((n: any) => !n.isRead);
+      const nonLues = data.filter((n: { isRead: boolean }) => !n.isRead);
       setNotificationCount(nonLues.length);
     } catch (error) {
       console.error('Erreur de récupération des notifications', error);
@@ -77,7 +82,7 @@ export default function HeaderAdmin() {
 
       <div className="flex flex-1 gap-x-4 items-center justify-end">
         {/* 🔔 Notification */}
-        <Link href="/notifications" className="relative">
+        <Link onClick={pageNotification} href="/notifications" className="relative">
           <FiBell className="text-xl" />
           {notificationCount > 0 && (
             <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">

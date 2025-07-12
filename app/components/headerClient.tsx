@@ -5,8 +5,11 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FiUser, FiLogOut, FiBell } from 'react-icons/fi';
+import type {Produit} from "../types/index";
+
 
 export default function HeaderClient() {
+
   const router = useRouter();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +26,7 @@ export default function HeaderClient() {
 
   const updatePanierCount = () => {
     const count = JSON.parse(localStorage.getItem('panier') || '[]');
-    const total = count.reduce((acc: any, item: any) => acc + item.quantity, 0);
+    const total = count.reduce((acc: number, item: Produit[]) => acc + item.quantity, 0);
     setPanierCount(total);
   };
 
@@ -39,7 +42,7 @@ export default function HeaderClient() {
       });
 
       const data = await res.json();
-      const nonLues = data.filter((n: any) => !n.isRead);
+      const nonLues = data.filter((n: boolean) => !n.isRead);
       setNotificationCount(nonLues.length);
       console.log('🔔 Notifications reçues :', data);
     } catch (error) {

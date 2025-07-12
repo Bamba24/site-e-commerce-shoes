@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
-import { Oxygen } from "next/font/google";
 import Dashboard from "./components/dashboard";
 import "../globals.css";
 
-const oxygen = Oxygen({
-  variable: "--font-oxygen",
-  subsets: ["latin"],
-  weight: ["300", "400", "700"],
-})
 
 export const metadata: Metadata = {
   title: "Create Next App",
