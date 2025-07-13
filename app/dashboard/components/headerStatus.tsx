@@ -1,4 +1,5 @@
 'use client'
+
 import { useAuth } from '../../context/AuthContext';
 import Headers from '@/app/components/headers';
 import HeaderAdmin from '@/app/components/headerAdmin';

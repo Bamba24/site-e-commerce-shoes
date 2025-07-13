@@ -1,5 +1,5 @@
+"use client"
 
-// import Image from "next/image";
 import React from "react";
 import HomePage from "./components/homePage";
 import Products from "./components/products";
