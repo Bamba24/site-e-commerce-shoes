@@ -1,15 +1,17 @@
-import { NextRequest, NextResponse } from 'next/server';
+// app/api/dashboardProduits/[id]/route.ts
+
+import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-// ✅ BONNE signature compatible avec App Router
+// ✅ Signature correcte
 export async function DELETE(
-  req: NextRequest,
-  context: { params: { id: string } }
+  req: Request,
+  { params }: { params: { id: string } }
 ) {
   try {
-    const id = context.params.id;
+    const id = params.id;
 
     const produit = await prisma.produit.delete({
       where: { id },
