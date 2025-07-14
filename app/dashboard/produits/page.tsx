@@ -32,19 +32,24 @@ export default function ProductList() {
   if (!confirm) return;
 
   try {
-    const res = await fetch(`/api/dashboardProduits/${id}`, {
+    const res = await fetch(`/api/delete-produit`, {
       method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id }), // 👈 on envoie l'id dans le body
     });
 
-    if (!res.ok) console.log("Echec de l'operation de suppresion");
+    if (!res.ok) {
+      console.error("Échec de la suppression");
+      return;
+    }
 
-    // Mise à jour du state local
     setProduits((prev) => prev.filter((p) => p.id !== id));
   } catch (error) {
     console.error('Erreur lors de la suppression :', error);
   }
 };
-
 
   return (
     <div className=" w-full col-span-3 gap-4 p-6">

@@ -5,7 +5,7 @@ import '../globals.css';
 
 export default function Category() {
   return (
-    <div className="px-4 py-10">
+    <div className="py-10">
       {/* Titre de la section */}
       <div className="text-center mb-10">
         <p className="[font-size:var(--police-secondary)] font-[var(--font-titre)]">

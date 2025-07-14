@@ -5,4 +5,8 @@ const nextConfig: import('next').NextConfig = {
   },
 }
 
+export const config = {
+  matcher: ["/profil", "/dashboard/:path*"],
+};
+
 module.exports = nextConfig;

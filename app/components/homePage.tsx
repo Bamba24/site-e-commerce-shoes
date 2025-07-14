@@ -5,7 +5,7 @@ import '../globals.css';
 
 export default function HomePage() {
   return (
-    <div className="text-center flex flex-col gap-y-10 items-center w-[90%] sm:w-[80%] lg:w-[50%] mx-auto py-10 px-4">
+    <div className="text-center flex flex-col gap-y-13 items-center w-[90%] sm:w-[80%] lg:w-[50%] mx-auto py-10">
       {/* Titre principal */}
       <h1 className="text-3xl sm:text-4xl text-white font-[var(--font-titre)]">
         Crafting Comfort, Redefining Spaces. Your Home, Your Signature Style!

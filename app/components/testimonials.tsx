@@ -6,7 +6,7 @@ import '../globals.css';
 
 export default function TestimonialsSection() {
   return (
-    <div className="px-4 py-10">
+    <div className="py-10">
       {/* Titre + bouton */}
       <div className="mb-[var(--margin-bottom-title)] flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
         <div className="lg:w-[50%] w-full">
@@ -27,7 +27,7 @@ export default function TestimonialsSection() {
       {/* Grille des témoignages */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {[1, 2, 3].map((item) => (
-          <div key={item} className="flex flex-col gap-4 p-6 bg-white rounded-xl shadow-md">
+          <div key={item} className="flex flex-col gap-4 px-6 py-10 bg-white rounded-xl shadow-md">
             <div className="flex items-center gap-4">
               <Image
                 src="/icon-svg/user.svg"

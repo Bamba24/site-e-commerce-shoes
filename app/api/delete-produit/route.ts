@@ -3,13 +3,14 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-// ✅ BONNE signature compatible avec App Router
-export async function DELETE(
-  req: NextRequest,
-  context: { params: Promise<{ id: string }> }
-) {
+export async function DELETE(req: NextRequest) {
   try {
-    const id = (await (context.params)).id;
+    const body = await req.json();
+    const id = body.id;
+
+    if (!id) {
+      return NextResponse.json({ error: 'ID manquant' }, { status: 400 });
+    }
 
     const produit = await prisma.produit.delete({
       where: { id },

@@ -6,7 +6,7 @@ import '../globals.css';
 
 export default function Footer() {
   return (
-    <div className="text-center flex flex-col gap-y-10 items-center bg-[var(--primary-color)] py-[var(--padding-section)] px-4">
+    <div className="text-center flex flex-col gap-y-10 items-center bg-[var(--primary-color)] py-[var(--padding-section)]">
       {/* Logo */}
       <Image src="/icon-svg/logo.svg" alt="Logo" width={100} height={100} />
 

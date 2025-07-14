@@ -6,7 +6,7 @@ import '../globals.css';
 
 export default function PopularProducts() {
   return (
-    <div className="px-4 py-10">
+    <div className="py-10">
       {/* Titre et bouton */}
       <div className="mb-[var(--margin-bottom-title)] flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
         <div className="lg:w-[50%] w-full">

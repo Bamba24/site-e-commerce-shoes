@@ -1,6 +1,6 @@
  export function isProtectedRoute(pathname: string) {
    // Define your protected routes here
-  const protectedRoutes = ["/api", "/components", "context", "lib", "types", "utils", "public", "prisma", "node_modules" ];
+  const protectedRoutes = ["/components", "api"];
 
    return protectedRoutes.includes(pathname);
  }
@@ -20,3 +20,7 @@ export function getUserFromToken(): { id: string; email: string; role: string } 
     return null;
   }
 }
+
+
+
+

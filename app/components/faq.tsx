@@ -5,7 +5,7 @@ import '../globals.css';
 
 export default function Faq() {
   return (
-    <div className="flex flex-col lg:flex-row justify-center gap-8 px-4 py-10">
+    <div className="flex flex-col lg:flex-row justify-center gap-8 py-10">
       {/* Colonne gauche */}
       <div className="lg:w-1/2 w-full">
         <p className="[font-size:var(--police-secondary)] font-[var(--font-titre)]">

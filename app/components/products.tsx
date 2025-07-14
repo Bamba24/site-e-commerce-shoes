@@ -5,7 +5,7 @@ import '../globals.css';
 
 export default function Products() {
   return (
-    <div className="px-4 py-10">
+    <div className="py-10">
       {/* Titre section */}
       <div className="mb-6">
         <p className="[font-size:var(--police-secondary)] mb-[var(--margin-bottom-title)] font-[var(--font-titre)]">
